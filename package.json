@@ -1,0 +1,16 @@
+{
+  "name": "india-election-live-svg",
+  "version": "1.0.0",
+  "description": "Live India election results dashboard with SVG area coloring.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["election", "india", "dashboard", "svg"],
+  "author": "Your Name",
+  "license": "MIT"
+}

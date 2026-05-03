@@ -1,0 +1,34 @@
+{
+  "updatedAt": "2026-05-04",
+  "dataSource": {
+    "name": "Election Commission of India results portal",
+    "url": "https://results.eci.gov.in/",
+    "note": "Official live trends/results source."
+  },
+  "states": [
+    {
+      "id": "west-bengal",
+      "name": "West Bengal",
+      "seats": 294,
+      "status": "Counting/results day; Falta re-poll pending",
+      "mapSource": "Wikimedia Commons SVG constituency maps",
+      "localSvg": "assets/maps/2026_West_Bengal_Legislative_Assembly_Election_Phase_Wise_Schedule.svg",
+      "mapUrl": "https://commons.wikimedia.org/wiki/File:2026_West_Bengal_Legislative_Assembly_Election_Phase_Wise_Schedule.svg",
+      "license": "CC BY 4.0",
+      "author": "FlyJet777",
+      "mapNote": "Phase-wise 2026 schedule map from Commons; use only as map geometry/reference, not official result data."
+    },
+    {
+      "id": "tamil-nadu",
+      "name": "Tamil Nadu",
+      "seats": 234,
+      "status": "Counting/results day",
+      "mapSource": "Wikimedia Commons SVG constituency maps",
+      "localSvg": "assets/maps/2026_Tamil_Nadu_Legislative_Assembly_Election_NDA_Seat_Sharing_Map.svg",
+      "mapUrl": "https://commons.wikimedia.org/wiki/File:2026_Tamil_Nadu_Legislative_Assembly_Election_NDA_Seat_Sharing_Map.svg",
+      "license": "CC BY 4.0",
+      "author": "FlyJet777",
+      "mapNote": "2026 NDA seat-sharing map from Commons; use only as map geometry/reference, not official result data."
+    }
+  ]
+}

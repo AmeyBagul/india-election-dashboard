@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>India Election Live Results Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <nav class="nav-bar" aria-label="Dashboard navigation">
+        <a class="brand" href="/">
+          <span class="brand-mark">IN</span>
+          <span>
+            <strong>Election Live</strong>
+            <small>Bengal + Tamil Nadu</small>
+          </span>
+        </a>
+        <div class="nav-actions">
+          <span class="source-chip" id="sourceName">Source waiting</span>
+          <button id="refreshButton" type="button">Refresh</button>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Today from ECI</p>
+          <h1 id="electionName">West Bengal + Tamil Nadu Election Results</h1>
+          <p class="hero-text">
+            Official ECI trends for West Bengal and Tamil Nadu, with live party position, close contests, and constituency details as counting data appears.
+          </p>
+          <div class="trust-row">
+            <span class="status-pill" id="feedStatus">Connecting</span>
+            <span id="lastUpdated">Waiting for first update</span>
+          </div>
+        </div>
+
+        <div class="hero-stats" aria-label="Election summary">
+          <div class="metric-card">
+            <span>Tracked seats</span>
+            <strong id="knownAreas">0</strong>
+          </div>
+          <div class="metric-card">
+            <span>Declared</span>
+            <strong id="declaredAreas">0</strong>
+          </div>
+          <div class="metric-card">
+            <span>Close races</span>
+            <strong id="closeAreas">0</strong>
+          </div>
+          <div class="metric-card">
+            <span>Parties</span>
+            <strong id="partyCount">0</strong>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="dashboard-grid">
+        <article class="map-panel" aria-label="Election area map">
+          <div class="panel-head">
+            <div>
+              <p class="label">SVG state selector</p>
+              <h2 id="selectedArea">Select an area</h2>
+            </div>
+            <span class="mini-chip" id="mapCoverage">0 mapped</span>
+          </div>
+
+          <div class="map-stage">
+            <div class="map-toolbar" aria-label="Map controls">
+              <div class="map-state-buttons" id="mapStateButtons"></div>
+              <div class="zoom-controls">
+                <button id="zoomOutButton" type="button" aria-label="Zoom out">-</button>
+                <span id="zoomLevel">100%</span>
+                <button id="zoomInButton" type="button" aria-label="Zoom in">+</button>
+                <button id="zoomResetButton" type="button">Reset</button>
+              </div>
+            </div>
+            <div id="svgMapViewport" class="svg-map-viewport" aria-label="Interactive constituency map"></div>
+            <div id="mapTooltip" class="map-tooltip" hidden></div>
+          </div>
+
+          <div id="mapLegend" class="legend"></div>
+        </article>
+
+        <aside class="right-rail">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="label">Party position</p>
+                <h2>Seats by party</h2>
+              </div>
+              <span class="mini-chip">Won + leading</span>
+            </div>
+            <div id="partyList" class="party-list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="label">Selected area</p>
+                <h2>Constituency details</h2>
+              </div>
+              <span id="detailStatus" class="mini-chip">Waiting</span>
+            </div>
+            <div id="seatDetails" class="details-empty">Click a colored area on the SVG map or a result row.</div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="label">Trusted sources</p>
+                <h2>State data</h2>
+              </div>
+              <span class="mini-chip">ECI + SVG refs</span>
+            </div>
+            <div id="stateSourceList" class="source-list"></div>
+          </section>
+        </aside>
+      </section>
+
+      <section class="panel close-panel">
+        <div class="panel-head">
+          <div>
+            <p class="label">Close contests</p>
+            <h2>Watchlist</h2>
+          </div>
+          <span class="mini-chip">Margin under 5,000</span>
+        </div>
+        <div id="closeList" class="close-list"></div>
+      </section>
+
+      <section class="panel explorer">
+        <div class="panel-head explorer-head">
+          <div>
+            <p class="label">Result explorer</p>
+            <h2>Constituency updates</h2>
+          </div>
+          <span id="seatCount" class="mini-chip">0 areas</span>
+        </div>
+
+        <div class="filters" aria-label="Result filters">
+          <input id="searchInput" type="search" placeholder="Search area, district, party, candidate">
+          <select id="stateSelect" aria-label="Select state">
+            <option value="all">West Bengal + Tamil Nadu</option>
+          </select>
+          <select id="partyFilter" aria-label="Filter by party">
+            <option value="all">All parties</option>
+          </select>
+          <select id="statusFilter" aria-label="Filter by status">
+            <option value="all">All statuses</option>
+            <option value="declared">Declared or won</option>
+            <option value="counting">Counting or leading</option>
+          </select>
+          <select id="marginFilter" aria-label="Filter by margin">
+            <option value="all">All margins</option>
+            <option value="500">Under 500</option>
+            <option value="1000">Under 1,000</option>
+            <option value="5000">Under 5,000</option>
+          </select>
+          <select id="sortSelect" aria-label="Sort results">
+            <option value="official">Official order</option>
+            <option value="close">Closest first</option>
+            <option value="votes">Highest votes</option>
+            <option value="party">Party name</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Area</th>
+                <th>Party</th>
+                <th>Candidate</th>
+                <th>Status</th>
+                <th>Margin</th>
+                <th>Votes</th>
+                <th>Round</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
